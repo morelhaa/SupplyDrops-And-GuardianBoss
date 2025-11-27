@@ -36,7 +36,6 @@ class BossBarTask extends Task {
                 if (!isset($this->viewers[$entity->getId()])) {
                     $this->showBossBar($entity);
                 } else {
-                    // Actualizar bossbar existente
                     $this->updateBossBar($entity);
                 }
             }
