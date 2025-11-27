@@ -12,7 +12,6 @@ use SupplyDrop\entities\SupplyChest;
 class BossManager {
 
     private Main $plugin;
-    /** @var GuardianBoss[] */
     private array $activeBosses = [];
 
     public function __construct(Main $plugin) {
@@ -20,9 +19,8 @@ class BossManager {
     }
 
     public function spawnBoss(Position $position, SupplyChest $chest): GuardianBoss {
-        $spawnPos = $position->add(3, 0, 3); // Spawn cerca del cofre
+        $spawnPos = $position->add(3, 0, 3);
 
-        // Convertir Position a Location
         $location = \pocketmine\entity\Location::fromObject(
             $spawnPos,
             $position->getWorld()
@@ -52,9 +50,6 @@ class BossManager {
         return $this->activeBosses[$id] ?? null;
     }
 
-    /**
-     * @return GuardianBoss[]
-     */
     public function getAllActiveBosses(): array {
         return $this->activeBosses;
     }
