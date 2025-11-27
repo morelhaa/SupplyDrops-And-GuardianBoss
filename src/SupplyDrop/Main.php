@@ -13,7 +13,7 @@ use SupplyDrop\managers\SupplyManager;
 use SupplyDrop\managers\BossManager;
 use SupplyDrop\managers\LootManager;
 
-use muqsit\invmenu\InvMenuHandler; // ← IMPORTANTE (ESTE ES EL BUENO)
+use muqsit\invmenu\InvMenuHandler;
 
 class Main extends PluginBase {
     use SingletonTrait;
@@ -28,29 +28,23 @@ class Main extends PluginBase {
 
     protected function onEnable(): void {
 
-        // Registrar InvMenu
         if(!InvMenuHandler::isRegistered()){
             InvMenuHandler::register($this);
         }
 
-        // Cargar config
         $this->saveDefaultConfig();
 
-        // Registrar entidades
         $this->registerEntity();
 
-        // Inicializar managers
         $this->lootManager = new LootManager($this);
         $this->supplyManager = new SupplyManager($this);
         $this->bossManager = new BossManager($this);
 
-        // Registrar comandos
         $this->getServer()->getCommandMap()->register(
             "supplydrop",
             new SupplyDropCommand($this)
         );
 
-        // Registrar listeners
         $this->getServer()->getPluginManager()->registerEvents(
             new EventListener($this),
             $this
