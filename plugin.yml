@@ -2,7 +2,7 @@ name: SupplyDrop
 main: SupplyDrop\Main
 version: 1.0.0
 api: 5.0.0
-author: YourName
+author: morelhaa
 
 permissions:
   supplydrop.command:
