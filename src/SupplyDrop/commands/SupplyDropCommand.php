@@ -31,7 +31,7 @@ class SupplyDropCommand extends Command {
         }
 
         if (empty($args)) {
-            $sender->sendMessage("§e-> SupplyDrop Commands:");
+            $sender->sendMessage("§eSupplyDrop Commands:");
             $sender->sendMessage("§7/supplydrop spawn §f- Spawn a supply drop");
             $sender->sendMessage("§7/supplydrop loot §f- Configure loot items");
             return false;
