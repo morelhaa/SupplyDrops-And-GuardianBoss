@@ -32,7 +32,6 @@ class LootManager {
             ];
         }
 
-        // Si no hay items, agregar defaults
         if (empty($this->lootTable)) {
             $this->lootTable = [
                 ["item" => "diamond", "count" => 5, "chance" => 50],
@@ -74,9 +73,6 @@ class LootManager {
         $this->saveLootTable();
     }
 
-    /**
-     * @return Item[]
-     */
     public function generateLoot(): array {
         $items = [];
 
