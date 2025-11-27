@@ -1,0 +1,10 @@
+name: SupplyDrop
+main: SupplyDrop\Main
+version: 1.0.0
+api: 5.0.0
+author: YourName
+
+permissions:
+  supplydrop.command:
+    description: "Allows using supply drop commands"
+    default: op

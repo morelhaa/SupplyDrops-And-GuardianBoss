@@ -1,0 +1,24 @@
+# SupplyDrop Configuration
+
+boss:
+  health: 200.0
+  damage: 10.0
+  lightning_cooldown: 60
+  return_distance: 30
+  name: "§c§lGUARDIAN BOSS"
+
+supply:
+  protected_time: 300
+  announce_spawn: true
+
+loot:
+  items:
+    - item: "diamond"
+      count: 5
+      chance: 50
+    - item: "iron_ingot"
+      count: 10
+      chance: 80
+    - item: "golden_apple"
+      count: 3
+      chance: 60
