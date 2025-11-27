@@ -33,17 +33,14 @@ class SupplyChest {
     private function spawn(): void {
         $world = $this->position->getWorld();
 
-        // Colocar cofre
         $world->setBlock($this->position, VanillaBlocks::CHEST());
 
-        // Obtener tile del cofre
         $tile = $world->getTile($this->position);
         if ($tile instanceof Chest) {
             $this->tile = $tile;
             $this->fillChest();
 
-            // Nombre personalizado
-            $tile->setName("§6§lSupply Drop");
+            $tile->setName("§6Supply Drop");
         }
     }
 
@@ -53,7 +50,6 @@ class SupplyChest {
         $inventory = $this->tile->getInventory();
         $loot = $this->plugin->getLootManager()->generateLoot();
 
-        // Llenar el cofre con el loot generado
         foreach ($loot as $item) {
             $inventory->addItem($item);
         }
@@ -64,7 +60,6 @@ class SupplyChest {
             return true;
         }
 
-        // Si está protegido, solo puede abrirse si el boss está muerto
         return false;
     }
 
@@ -95,7 +90,6 @@ class SupplyChest {
     public function remove(): void {
         $world = $this->position->getWorld();
 
-        // Remover el bloque
         $world->setBlock($this->position, VanillaBlocks::AIR());
 
         $this->tile = null;
