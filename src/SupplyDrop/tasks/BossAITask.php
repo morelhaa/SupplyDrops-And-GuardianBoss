@@ -68,7 +68,7 @@ class BossAITask extends Task {
 
     private function findTarget(): void {
         $homePos = $this->boss->getHomePosition();
-        $players = $this->boss->getWorld()->getNearbyEntities($this->boss->getBoundingBox()->expandedCopy(30, 20, 30)); // Mayor rango de detección
+        $players = $this->boss->getWorld()->getNearbyEntities($this->boss->getBoundingBox()->expandedCopy(30, 20, 30)); 
 
         $closestPlayer = null;
         $closestDistance = PHP_FLOAT_MAX;
@@ -101,7 +101,7 @@ class BossAITask extends Task {
         $distance = sqrt($dx * $dx + $dz * $dz);
 
         if ($distance > 2) {
-            $speed = 0.5; // MÁS RÁPIDO (era 0.3)
+            $speed = 0.5; 
             $motionX = ($dx / $distance) * $speed;
             $motionZ = ($dz / $distance) * $speed;
 
