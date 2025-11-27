@@ -16,7 +16,6 @@ use SupplyDrop\entities\SupplyChest;
 class SupplyManager {
 
     private Main $plugin;
-    /** @var SupplyChest[] */
     private array $activeDrops = [];
 
     public function __construct(Main $plugin) {
@@ -26,32 +25,24 @@ class SupplyManager {
     public function spawnSupplyDrop(Position $position): void {
         $world = $position->getWorld();
 
-        // Anunciar spawn si está habilitado
         if ($this->plugin->getConfig()->getNested("supply.announce_spawn", true)) {
             $this->plugin->getServer()->broadcastMessage("§e§l[!] §6A Supply Drop is falling from the sky!");
         }
 
-        // Crear efecto de caída desde el cielo
         $dropPos = $position->add(0, 50, 0);
 
-        // Partículas y sonido inicial
         $world->addParticle($dropPos, new HugeExplodeParticle());
         $world->addSound($dropPos, new AnvilFallSound());
 
-        // Crear cofre en el suelo después de 2 segundos (40 ticks)
         $this->plugin->getScheduler()->scheduleDelayedTask(
             new ClosureTask(function() use ($position, $world): void {
                 $chest = new SupplyChest($position, $this->plugin);
                 $this->activeDrops[$chest->getId()] = $chest;
 
-                // Spawner boss guardian
                 $this->plugin->getBossManager()->spawnBoss($position, $chest);
 
-                // Efectos de impacto
                 $world->addParticle($position, new HugeExplodeParticle());
                 $world->addSound($position, new AnvilFallSound());
-
-                // Anunciar ubicación
                 $x = (int)$position->x;
                 $y = (int)$position->y;
                 $z = (int)$position->z;
@@ -79,9 +70,6 @@ class SupplyManager {
         return $this->activeDrops[$id] ?? null;
     }
 
-    /**
-     * @return SupplyChest[]
-     */
     public function getAllActiveDrops(): array {
         return $this->activeDrops;
     }
