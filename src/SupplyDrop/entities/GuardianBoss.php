@@ -52,26 +52,22 @@ class GuardianBoss extends Living {
         $this->setMaxHealth($health);
         $this->setHealth($health);
 
-        // Hacer visible inmediatamente
         $this->setNameTagAlwaysVisible(true);
         $this->setNameTagVisible(true);
 
-        // Spawn inmediato al mundo
         $this->spawnToAll();
 
-        // Iniciar IA
         $this->plugin->getScheduler()->scheduleRepeatingTask(
             new BossAITask($this, $this->plugin),
             20
         );
 
-        // Iniciar BossBar
         $this->bossBarTask = new BossBarTask($this);
         $this->plugin->getScheduler()->scheduleRepeatingTask($this->bossBarTask, 10);
     }
 
     protected function getInitialSizeInfo(): EntitySizeInfo {
-        return new EntitySizeInfo(2.4, 0.7); // Tamaño de Wither Skeleton
+        return new EntitySizeInfo(2.4, 0.7); 
     }
 
     public function getName(): string {
@@ -149,15 +145,12 @@ class GuardianBoss extends Living {
     protected function onDeath(): void {
         parent::onDeath();
 
-        // Cancelar tasks
         if (isset($this->bossBarTask)) {
             $this->bossBarTask->getHandler()?->cancel();
         }
 
-        // Broadcast muerte
         $this->plugin->getServer()->broadcastMessage("§c§l[!] §cThe Guardian Boss has been defeated!");
 
-        // Remover del manager
         $this->plugin->getBossManager()->removeBoss($this->getId());
     }
 
